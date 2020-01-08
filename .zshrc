@@ -155,3 +155,15 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
 
+
+## for dotfiles
+DOTPATH=~/.dotfiles
+for f in .??*
+do 
+  [ "$f" = ".git" ] && continue
+
+    ln -snfv "$DOTPATH/$f" "$HOME"/"$f"
+done
+
+
+
