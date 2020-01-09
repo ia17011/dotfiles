@@ -1,4 +1,4 @@
-# If you come from bash you might have to change your $PATH.
+#If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export LANG=ja_JP.UTF-8
 
@@ -127,6 +127,15 @@ alias ll='ls -l'
 alias lla='ls -la'
 alias ls='ls -F'
 alias ls='ls -v -G'
+alias l='clear && ll'
+
+alias ..='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+
+alias dot='~/.dotfiles'
+alias zshrc='vi ~/.dotfiles/.zshrc'
+alias zshconfig='vi ~/.dotfiles/.zshrc'
 
 ## alias for git
 alias ga='git add'
@@ -154,16 +163,4 @@ alias gst='git stash'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
-
-
-## for dotfiles
-DOTPATH=~/.dotfiles
-for f in .??*
-do 
-  [ "$f" = ".git" ] && continue
-
-    ln -snfv "$DOTPATH/$f" "$HOME"/"$f"
-done
-
-
 
