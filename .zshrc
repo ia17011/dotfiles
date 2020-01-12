@@ -137,6 +137,10 @@ alias dot='~/.dotfiles'
 alias zshrc='vi ~/.dotfiles/.zshrc'
 alias zshconfig='vi ~/.dotfiles/.zshrc'
 
+alias repos='ghq list -p | peco'
+alias repo='cd $(repos)'
+alias github='gh-open $(repos)'
+
 ## alias for git
 alias ga='git add'
 alias gaa='git add .'
