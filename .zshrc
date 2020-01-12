@@ -141,6 +141,18 @@ alias repos='ghq list -p | peco'
 alias repo='cd $(repos)'
 alias github='gh-open $(repos)'
 
+function get_target_repo() {
+        if [ $# -eq 1 ]: then
+                echo $1
+        else
+                echo $(repos)
+        fi
+}
+
+function code() {
+        oepn -a code\ Text $(get_target_repo $1)
+}
+
 ## alias for git
 alias ga='git add'
 alias gaa='git add .'
