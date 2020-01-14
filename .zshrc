@@ -137,6 +137,7 @@ alias dot='~/.dotfiles'
 alias zshrc='vi ~/.dotfiles/.zshrc'
 alias zshconfig='vi ~/.dotfiles/.zshrc'
 
+## peco and ghq settings
 alias repos='ghq list -p | peco'
 alias repo='cd $(repos)'
 alias github='gh-open $(repos)'
@@ -153,7 +154,12 @@ function code() {
         oepn -a code\ Text $(get_target_repo $1)
 }
 
-## alias for git
+function find_cd(){
+        cd "$(find . -type d | peco)"
+}
+alias fc="find_cd"
+
+## git settings
 alias ga='git add'
 alias gaa='git add .'
 alias gaaa='git add -A'
