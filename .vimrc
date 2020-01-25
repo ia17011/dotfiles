@@ -1,4 +1,17 @@
+if 0 | endif
+"-------------------------------------------------------------------------
 
+set encoding=utf-8
+scriptencoding utf-8
+
+
+"-------------------------------------------------------------------------
+
+set tabstop=4
+set shiftwidth=4
+
+
+"-------------------------------------------------------------------------
 "#
 syntax on
 set nobackup
@@ -17,11 +30,13 @@ set laststatus=2
 set expandtab
 set smartindent
 
+"-------------------------------------------------------------------------
 
-"# seach
+"search:
 set ignorecase
 set smartcase
 set wrapscan
 set incsearch
 set hlsearch
 
+"-------------------------------------------------------------------------

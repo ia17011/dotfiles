@@ -142,21 +142,15 @@ alias repos='ghq list -p | peco'
 alias repo='cd $(repos)'
 alias github='gh-open $(repos)'
 
-function get_target_repo() {
-        if [ $# -eq 1 ]: then
-                echo $1
-        else
-                echo $(repos)
-        fi
-}
 
 function code() {
         oepn -a code\ Text $(get_target_repo $1)
 }
 
-function find_cd(){
+function find_cd() {
         cd "$(find . -type d | peco)"
 }
+
 alias fc="find_cd"
 
 ## git settings
