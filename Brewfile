@@ -23,6 +23,7 @@ brew "terraform"
 brew "wget"
 brew "ricty"
 brew "tig"
+brew "gibo"
 
 cask "docker"
 cask "iterm2"
