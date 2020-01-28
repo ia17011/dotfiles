@@ -34,6 +34,5 @@ cask "notion"
 cask "alfred"
 cask "visual-studio-code"
 cask "kindle"
-cask "tomighty"
 cask "skitch"
 
