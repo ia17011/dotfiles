@@ -1,2 +1,4 @@
 .dotfiles
 .zsh_history
+
+.vim/bundle/repos/github.com/Shougo
