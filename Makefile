@@ -15,6 +15,9 @@ help:
 	@echo "clean   => remove the dotfiles."
 	@echo "destroy => remove the dotfiles and this repo."
 
+list:
+	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
+
 init:
 	@DOTPAH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
