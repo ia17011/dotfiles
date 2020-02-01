@@ -1,16 +1,6 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export LANG=ja_JP.UTF-8
 
-export ZSH="/Users/kirohi/.oh-my-zsh"
-
-ZSH_THEME="af-magic"
-
-PROMPT='%m:%F{green}%c%f %n$ '
-
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -101,3 +91,6 @@ alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
 
+
+# prezto
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
