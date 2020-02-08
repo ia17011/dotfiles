@@ -1,5 +1,6 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export LANG=ja_JP.UTF-8
+export XDG_CONFIG_HOME=$HOME/.dotfiles/.config
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
