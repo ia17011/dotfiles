@@ -1,5 +1,7 @@
 [user]
-        name = ia17011
-        email = cfoyvlird@gmail.com
+  name = ia17011
+  email = cfoyvlird@gmail.com
+[core]
+  editor = nvim
 [ghq]
-        root = ~/Users/kirohi
+  root = ~/Users/kirohi
