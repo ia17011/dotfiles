@@ -19,19 +19,19 @@ inoremap <C-j> <Down>
 "  dein vim
 " ------------------------------------------------------------
 
-if &compatible
-  set nocompatible
-endif
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
-  call dein#load_toml('~/.dotfiles/.config/nvim/dein.toml', {'lazy': 0}) " Neovim起動時にロード
-  call dein#load_toml('~/.dotfiles/.config/nvim/lazy.toml', {'lazy': 1}) " Plugin使用の際にロード
-  call dein#end()
-  call dein#save_state()
-endif
-filetype plugin indent on
-syntax enable
+# if &compatible
+#   set nocompatible
+# endif
+# set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+# if dein#load_state('~/.cache/dein')
+#   call dein#begin('~/.cache/dein')
+#   call dein#load_toml('~/.dotfiles/.config/nvim/dein.toml', {'lazy': 0}) " Neovim起動時にロード
+#   call dein#load_toml('~/.dotfiles/.config/nvim/lazy.toml', {'lazy': 1}) " Plugin使用の際にロード
+#   call dein#end()
+#   call dein#save_state()
+# endif
+# filetype plugin indent on
+# syntax enable
 
 " ------------------------------------------------------------
 "  settings
