@@ -7,7 +7,7 @@ brew bundle
 
 set -u
 
-DOTPATH=~/.dotfiles
+DOTPATH=~/dotfiles
 GITHUB_URL=https://github.com/ia17011/dotfiles
 
 # add submodule
@@ -37,5 +37,5 @@ done
 chsh -s $(which zsh)
 
 source "$DOTPATH"/.zshrc
-source "$DOTPATH"/.zpreztorc
+source "$DOTPATH"/.zsh/.zpreztorc
 
