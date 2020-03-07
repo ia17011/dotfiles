@@ -17,7 +17,9 @@ formulas=(
   git
   ghq
   peco
+  zsh
   zsh-syntax-highlighting
+  tmux
   jq
   mysql
   postgresql
@@ -33,6 +35,7 @@ formulas=(
   ricty
   tig
   gibo
+  github/gh/gh
 )
 
 "brew tap..."
