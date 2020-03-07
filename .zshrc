@@ -42,22 +42,39 @@ alias zshconfig='vi ~/.dotfiles/.zshrc'
 setopt nonomatch
 
 # peco and ghq settings
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
+
+function peco-find-file() {
+    if git rev-parse 2> /dev/null; then
+        source_files=$(git ls-files)
+    else
+        source_files=$(find . -type f)
+    fi
+    selected_files=$(echo $source_files | peco --prompt "[find file]")
+
+    BUFFER="${BUFFER}${echo $selected_files | tr '\n' ' '}"
+    CURSOR=$#BUFFER
+    zle redisplay
+}
+zle -N peco-find-file
+bindkey '^Q' peco-find-file
+
+
 alias repos='ghq list -p | peco'
 alias repo='cd $(repos)'
-alias github='gh-open $(repos)'
+alias github='gh repo view $(repos)'
+alias gb='`git branch | peco | sed -e "s/^\*[ ]*//g"`'
 
 function find_cd() {
         cd "$(find . -type d | peco)"
 }
-
-function peco_history_selection() {
-  BUFFER=`history -n 1 | tail -r | awk '!a[$0]++' | peco`
-  CURSOR=$#BUFFER
-  zle reset-prompt
-}
-
-zle -N peco_history_selection
-bindkey '^R' peco_history_selection
 
 alias fc="find_cd"
 
@@ -96,35 +113,8 @@ function peco-todoist-labels () {
 zle -N peco-todoist-labels
 bindkey "^xtl" peco-todoist-labels
 
-# todoist close
-function peco-todoist-close() {
-    local SELECTED_ITEMS="$(todoist list | peco | cut -d ' ' -f 1 | tr '\n' ' ')"
-    if [ -n "$SELECTED_ITEMS" ]; then
-        BUFFER="todoist close $(echo "$SELECTED_ITEMS" | tr '\n' ' ')"
-        CURSOR=$#BUFFER
-    fi
-    zle accept-line
-}
-zle -N peco-todoist-close
-bindkey "^xtc" peco-todoist-close
-
-function toggl-start-todoist () {
-    local selected_item_id=`todoist --project-namespace --namespace list | peco | cut -d ' ' -f 1`
-    if [ ! -n "$selected_item_id" ]; then
-        return 0
-    fi
-    local selected_item_content=`todoist --csv show ${selected_item_id} | grep Content | cut -d',' -f2- | sed s/\"//g`
-    if [ -n "$selected_item_content" ]; then
-        BUFFER="toggl start \"${selected_item_content}\""
-        CURSOR=$#BUFFER
-        zle accept-line
-    fi
-}
-zle -N toggl-start-todoist
-bindkey '^xts' toggl-start-todoist
-
 # always show prompt
-function toggl_current() {
+toggl_current() {
   local tgc=$(toggl --cache --csv current)
   local tgc_time=$(echo $tgc | grep Duration | cut -d ',' -f 2)
   local tgc_dsc=$(echo $tgc | grep Description | cut -d ',' -f 2 | cut -c 1-20)
@@ -144,7 +134,6 @@ alias tgs='toggl stop'
 alias ga='git add'
 alias gaa='git add .'
 alias gaaa='git add -A'
-alias gb='git branch'
 alias gbd='git branch -d '
 alias gc='git commit'
 alias gcm='git commit -m'
