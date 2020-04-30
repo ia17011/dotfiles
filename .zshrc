@@ -180,7 +180,7 @@ alias gstp='git stash pop'
 alias gstd='git stash drop'
 alias gclean-local='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
 alias gcz='git cz'
-
+alias hb='hub browse'
 
 ## npm aliases
 alias ni="npm install";
