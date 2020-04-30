@@ -24,6 +24,7 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 # mysql
 export PATH="/usr/local/opt/mysql@8.0.19/bin:$PATH"
 
+# aliases
 alias la='ls -a'
 alias la='ls -al'
 alias ll='ls -lav' 
@@ -37,12 +38,20 @@ alias ..='cd ..'
 alias ..2='cd ../..'
 alias ..3='cd ../../..'
 
-alias dot='~/.dotfiles'
-alias zshrc='vi ~/.dotfiles/.zshrc'
-alias zshconfig='vi ~/.dotfiles/.zshrc'
+alias zshrc='vi ~/dotfiles/.zshrc'
+alias zshconfig='vi ~/dotfiles/.zshrc'
+alias vz="vim ~/.zshrc";
+alias cz="code ~/.zshrc";
+alias sz="source ~/.zshrc";
+alias de="cd ~/Desktop";
+alias npm-update="npx npm-check -u";
+alias yarn-update="yarn upgrade-interactive --latest";
 
 # zsh settings
 setopt nonomatch
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
 
 # peco and ghq settings
 function peco-history-selection() {
@@ -139,11 +148,12 @@ toggl_current() {
   fi
 }
 
+
 # toggle alias
 alias tl='todoist --project-namespace --namespace --color list'
 alias tgs='toggl stop'
 
-# git settings
+# git aliases
 alias ga='git add'
 alias gaa='git add .'
 alias gaaa='git add -A'
@@ -170,6 +180,32 @@ alias gstp='git stash pop'
 alias gstd='git stash drop'
 alias gclean-local='git branch --merged | grep -v "*" | xargs -I % git branch -d %'
 alias gcz='git cz'
+
+
+## npm aliases
+alias ni="npm install";
+alias nrs="npm run start -s --";
+alias nrb="npm run build -s --";
+alias nrd="npm run dev -s --";
+alias nrt="npm run test -s --";
+alias nrtw="npm run test:watch -s --";
+alias nrv="npm run validate -s --";
+alias rmn="rm -rf node_modules";
+alias flush-npm="rm -rf node_modules && npm i && say NPM is done";
+alias nicache="npm install --prefer-offline";
+alias nioff="npm install --offline";
+
+# yarn aliases
+alias yar="yarn run";
+alias yas="yarn run start";
+alias yab="yarn run build";
+alias yat="yarn run test";
+alias yav="yarn run validate";
+alias yoff="yarn add --offline";
+alias ypm="echo \"Installing deps without lockfile and ignoring engines\" && yarn install --no-lockfile --ignore-engines"lias yar="yarn run"
+
+# use hub for git
+alias git=hub
 
 # prezto
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
