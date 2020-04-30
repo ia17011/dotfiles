@@ -21,6 +21,9 @@ export GO111MODULE=on
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
+# mysql
+export PATH="/usr/local/opt/mysql@8.0.19/bin:$PATH"
+
 alias la='ls -a'
 alias la='ls -al'
 alias ll='ls -lav' 
@@ -65,6 +68,16 @@ function peco-find-file() {
 }
 zle -N peco-find-file
 bindkey '^Q' peco-find-file
+
+function peco-checkout-pull-request () {
+    local selected_pr_id=$(gh pr list | peco | awk '{ print $1 }')
+    if [ -n "$selected_pr_id" ]; then
+        BUFFER="gh pr checkout ${selected_pr_id}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-checkout-pull-request
 
 
 alias repos='ghq list -p | peco'
