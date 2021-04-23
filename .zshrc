@@ -4,39 +4,52 @@ export XDG_CONFIG_HOME=$HOME/.dotfiles/.config
 export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
+export LINES=100000000
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+export HISTTIMEFORMAT='%Y%m%d %T'
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# google cloud
+export GOOGLE_APPLICATION_CREDENTIALS="/Users/kirohi/Dev/key/sec_koolhaas.json"
 
 # go
 export GO111MODULE=on
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$GOPATH/bin:$PATH
 
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# gen-hie
+export PATH=$HOME/.local/bin
 
 # mysql
 export PATH="/usr/local/opt/mysql@8.0.19/bin:$PATH"
 
 # aliases
-alias la='ls -a'
-alias la='ls -al'
-alias ll='ls -lav' 
-alias ll='ls -l'
-alias lla='ls -la'
-alias ls='ls -F'
-alias ls='ls -v -G'
-alias l='clear && ll'
+if [ $(command -v exa) ]; then
+  alias l='exa'
+  alias ls='exa --git'
+  alias la='exa -a --git'
+  alias ll='exa -lab --git'
+  alias tree='exa --tree'
+else 
+  alias la='ls -a'
+  alias la='ls -al'
+  alias ll='ls -lav' 
+  alias ll='ls -l'
+  alias lla='ls -la'
+  alias l='clear && ll'
+fi
+
+alias cat='bat'
 
 alias ..='cd ..'
 alias ..2='cd ../..'
 alias ..3='cd ../../..'
+alias n='navi'
 
 alias zshrc='vi ~/dotfiles/.zshrc'
 alias zshconfig='vi ~/dotfiles/.zshrc'
@@ -47,21 +60,26 @@ alias de="cd ~/Desktop";
 alias npm-update="npx npm-check -u";
 alias yarn-update="yarn upgrade-interactive --latest";
 
+alias python -v="python --version"
+alias nrc="npm run local"
+
 # zsh settings
 setopt nonomatch
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 
-# peco and ghq settings
-function peco-history-selection() {
-    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
-    CURSOR=$#BUFFER
-    zle reset-prompt
+function peco-select-history() {
+    # historyを番号なし、逆順、最初から表示。
+    # 順番を保持して重複を削除。
+    # カーソルの左側の文字列をクエリにしてpecoを起動
+    # \nを改行に変換
+    BUFFER="$(\history -nr 1 | awk '!a[$0]++' | peco --query "$LBUFFER" | sed 's/\\n/\n/')"
+    CURSOR=$#BUFFER             # カーソルを文末に移動
+    zle -R -c                   # refresh
 }
-
-zle -N peco-history-selection
-bindkey '^R' peco-history-selection
+zle -N peco-select-history
+bindkey '^R' peco-select-history
 
 function peco-find-file() {
     if git rev-parse 2> /dev/null; then
@@ -211,3 +229,10 @@ alias git=hub
 source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
 [[ -s "/Users/kirohi/.gvm/scripts/gvm" ]] && source "/Users/kirohi/.gvm/scripts/gvm"
+eval "$(anyenv init -)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/kirohi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kirohi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/kirohi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kirohi/google-cloud-sdk/completion.zsh.inc'; fi
